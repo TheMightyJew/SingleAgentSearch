@@ -1,8 +1,10 @@
+import java.util.*;
 
 public class UniformCostSearch   extends ASearch
 {
 	// Define lists here ...
-	
+	private PriorityQueue<ASearchNode> open_list;
+	private Set<ASearchNode> closed_list;
 	@Override
 	public String getSolverName() 
 	{
@@ -22,7 +24,13 @@ public class UniformCostSearch   extends ASearch
 	@Override
 	public void initLists() 
 	{
-
+		open_list = new PriorityQueue<>(new Comparator<ASearchNode>() {
+			@Override
+			public int compare(ASearchNode o1, ASearchNode o2) {
+				return (int)(o1.getG() - o2.getG());
+			}
+		});
+		closed_list = new HashSet<>();
 	}
 
 	@Override
@@ -31,6 +39,17 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
+		if(open_list.contains(node)){
+			Iterator<ASearchNode> i = open_list.iterator();
+			while (i.hasNext()){
+				ASearchNode tmp = i.next();
+				if (node.equals(tmp)){
+					ASearchNode res = tmp;
+					open_list.remove(res);
+					return res;
+				}
+			}
+		}
 		return null;
 	}
 
@@ -40,7 +59,7 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-		return false;
+		return open_list.contains(node);
 	}
 	
 	@Override
@@ -49,7 +68,7 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-		return false;
+		return closed_list.contains(node);
 	}
 
 	@Override
@@ -58,7 +77,7 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-
+		open_list.add(node);
 	}
 
 	@Override
@@ -67,19 +86,19 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-
+		closed_list.add(node);
 	}
 
 	@Override
 	public int openSize() 
 	{
-		return 0;
+		return open_list.size();
 	}
 
 	@Override
 	public ASearchNode getBest() 
 	{
-		return null;
+		return open_list.poll();
 	}
 
 }
