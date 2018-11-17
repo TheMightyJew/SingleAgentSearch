@@ -12,8 +12,8 @@ public class Main
 		
 		System.out.println("Start!");
 //		task1();
-//		task2();
-		task3();
+		task2();
+		//task3();
 		//task4();
 		//task5();
 		//task6();
@@ -111,6 +111,7 @@ public class Main
 				System.out.println("");
 			}
 			System.out.println("Total time:  " + totalTime/60000.0 + " min");
+			System.out.println("Total time:  " + totalTime/1000.0 + " sec");
 			System.out.println("");
 		} 
 		catch (IOException e) 

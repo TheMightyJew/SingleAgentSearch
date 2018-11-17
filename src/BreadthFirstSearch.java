@@ -35,17 +35,32 @@ public class BreadthFirstSearch  extends ASearch
 		ASearchNode node
 	) 
 	{
-	    if(open_list.contains(node)){
-	        Iterator<ASearchNode> i = open_list.iterator();
-	        while (i.hasNext()){
-	            ASearchNode tmp = i.next();
-	            if (node.equals(tmp)){
-	                ASearchNode res = tmp;
-	                open_list.remove(res);
-	                return res;
-                }
-            }
-        }
+//	    if(open_list.contains(node)){
+//	        Iterator<ASearchNode> i = open_list.iterator();
+//	        while (i.hasNext()){
+//	            ASearchNode tmp = i.next();
+//	            if (node.equals(tmp)){
+//	                ASearchNode res = tmp;
+//	                open_list.remove(res);
+//	                return res;
+//                }
+//            }
+//        }
+
+		//best remove
+//		for (ASearchNode t:open_list) {
+//			if (node.equals(t)) {
+//				ASearchNode res = t;
+//				open_list.remove(res);
+//				return res;
+//			}
+//		}
+		for (ASearchNode t:open_list) {//best without remove
+			if (node.equals(t)) {
+				return t;
+			}
+		}
+
 		return null;
 	}
 
