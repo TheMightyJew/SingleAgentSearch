@@ -4,7 +4,7 @@ public class UniformCostSearch   extends ASearch
 {
 	// Define lists here ...
 	private PriorityQueue<ASearchNode> open_list;
-	private Set<ASearchNode> closed_list;
+	private Queue<ASearchNode> closed_list;
 	@Override
 	public String getSolverName() 
 	{
@@ -32,7 +32,7 @@ public class UniformCostSearch   extends ASearch
 				return (int)(o1.getG() - o2.getG());
 			}
 		});
-		closed_list = new HashSet<>();
+		closed_list = new LinkedList<>();
 	}
 
 	@Override

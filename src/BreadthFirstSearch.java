@@ -3,8 +3,8 @@ import java.util.*;
 public class BreadthFirstSearch  extends ASearch
 {
 	// Define lists here ...
-	private Queue<ASearchNode> open_list;
-	private Set<ASearchNode> closed_list;
+	private Queue<BlindSearchNode> open_list;
+	private Queue<BlindSearchNode> closed_list;
 
 	@Override
 	public String getSolverName() 
@@ -26,7 +26,7 @@ public class BreadthFirstSearch  extends ASearch
 	public void initLists() 
 	{
         open_list = new LinkedList<>();
-        closed_list = new HashSet<>();
+        closed_list = new LinkedList<>();
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class BreadthFirstSearch  extends ASearch
 //				return res;
 //			}
 //		}
-		for (ASearchNode t:open_list) {//best without remove
+		for (BlindSearchNode t:open_list) {//best without remove
 			if (node.equals(t)) {
 				return t;
 			}
@@ -88,7 +88,7 @@ public class BreadthFirstSearch  extends ASearch
 		ASearchNode node
 	) 
 	{
-		open_list.add(node);
+		open_list.add((BlindSearchNode)node);
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class BreadthFirstSearch  extends ASearch
 		ASearchNode node
 	) 
 	{
-	    closed_list.add(node);
+	    closed_list.add((BlindSearchNode)node);
 	}
 
 	@Override
