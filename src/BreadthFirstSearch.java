@@ -4,7 +4,7 @@ public class BreadthFirstSearch  extends ASearch
 {
 	// Define lists here ...
 	private Queue<BlindSearchNode> open_list;
-	private Queue<BlindSearchNode> closed_list;
+	private ArrayList<BlindSearchNode> closed_list;
 
 	@Override
 	public String getSolverName() 
@@ -26,7 +26,7 @@ public class BreadthFirstSearch  extends ASearch
 	public void initLists() 
 	{
         open_list = new LinkedList<>();
-        closed_list = new LinkedList<>();
+        closed_list = new ArrayList<>();
 	}
 
 	@Override
@@ -35,27 +35,7 @@ public class BreadthFirstSearch  extends ASearch
 		ASearchNode node
 	) 
 	{
-//	    if(open_list.contains(node)){
-//	        Iterator<ASearchNode> i = open_list.iterator();
-//	        while (i.hasNext()){
-//	            ASearchNode tmp = i.next();
-//	            if (node.equals(tmp)){
-//	                ASearchNode res = tmp;
-//	                open_list.remove(res);
-//	                return res;
-//                }
-//            }
-//        }
-
-		//best remove
-//		for (ASearchNode t:open_list) {
-//			if (node.equals(t)) {
-//				ASearchNode res = t;
-//				open_list.remove(res);
-//				return res;
-//			}
-//		}
-		for (BlindSearchNode t:open_list) {//best without remove
+		for (BlindSearchNode t:open_list) {
 			if (node.equals(t)) {
 				return t;
 			}

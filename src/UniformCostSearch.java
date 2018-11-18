@@ -4,7 +4,7 @@ public class UniformCostSearch   extends ASearch
 {
 	// Define lists here ...
 	private PriorityQueue<ASearchNode> open_list;
-	private Queue<ASearchNode> closed_list;
+	private ArrayList<ASearchNode> closed_list;
 	@Override
 	public String getSolverName() 
 	{
@@ -24,15 +24,13 @@ public class UniformCostSearch   extends ASearch
 	@Override
 	public void initLists() 
 	{
-		// better imo:
-		//open_list=new PriorityQueue<ASearchNode>((a,b)-> (int)(a.getG()-b.getG()) );
 		open_list = new PriorityQueue<>(new Comparator<ASearchNode>() {
 			@Override
 			public int compare(ASearchNode o1, ASearchNode o2) {
 				return (int)(o1.getG() - o2.getG());
 			}
 		});
-		closed_list = new LinkedList<>();
+		closed_list = new ArrayList<>();
 	}
 
 	@Override
@@ -41,27 +39,7 @@ public class UniformCostSearch   extends ASearch
 		ASearchNode node
 	) 
 	{
-//		if(open_list.contains(node)){
-//			Iterator<ASearchNode> i = open_list.iterator();
-//			while (i.hasNext()){
-//				ASearchNode tmp = i.next();
-//				if (node.equals(tmp)){
-//					ASearchNode res = tmp;
-//					open_list.remove(res);
-//					return res;
-//				}
-//			}
-//		}
-
-		//best remove
-//		for (ASearchNode t:open_list) {
-//			if (node.equals(t)) {
-//				ASearchNode res = t;
-//				open_list.remove(res);
-//				return res;
-//			}
-//		}
-		for (ASearchNode t:open_list) {//best without remove
+		for (ASearchNode t:open_list) {
 			if (node.equals(t)) {
 				return t;
 			}
