@@ -25,7 +25,7 @@ public class BreadthFirstSearch  extends ASearch
 	@Override
 	public void initLists() 
 	{
-        open_list = new LinkedList<>();
+        open_list = new ArrayDeque<>();
         closed_list = new ArrayList<>();
 	}
 

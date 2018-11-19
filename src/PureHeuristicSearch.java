@@ -1,87 +1,101 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 public class PureHeuristicSearch  extends ASearch
 {
 	// Define lists here ...
-	
+	private PriorityQueue<ASearchNode> open_list;
+	private ArrayList<ASearchNode> closed_list;
 	@Override
-	public String getSolverName() 
+	public String getSolverName()
 	{
 		return "PHS";
 	}
 
 	@Override
 	public ASearchNode createSearchRoot
-	(
-		IProblemState problemState
-	) 
+			(
+					IProblemState problemState
+			)
 	{
 		ASearchNode newNode = new HeuristicSearchNode(problemState);
 		return newNode;
 	}
-	
-	@Override
-	public void initLists() 
-	{
 
+	@Override
+	public void initLists()
+	{
+		open_list = new PriorityQueue<>(new Comparator<ASearchNode>() {
+			@Override
+			public int compare(ASearchNode o1, ASearchNode o2) {
+				return (int)(o1.getH() - o2.getH());
+			}
+		});
+		closed_list = new ArrayList<>();
 	}
 
 	@Override
 	public ASearchNode getOpen
-	(
-		ASearchNode node
-	) 
+			(
+					ASearchNode node
+			)
 	{
+		for (ASearchNode t:open_list) {
+			if (node.equals(t)) {
+				return t;
+			}
+		}
+
 		return null;
 	}
 
 	@Override
 	public boolean isOpen
-	(
-		ASearchNode node
-	) 
+			(
+					ASearchNode node
+			)
 	{
-		return false;
-	}
-	
-	@Override
-	public boolean isClosed
-	(
-		ASearchNode node
-	) 
-	{
-		return false;
+		return open_list.contains(node);
 	}
 
-	
+	@Override
+	public boolean isClosed
+			(
+					ASearchNode node
+			)
+	{
+		return closed_list.contains(node);
+	}
 
 	@Override
 	public void addToOpen
-	(
-		ASearchNode node
-	) 
+			(
+					ASearchNode node
+			)
 	{
-
+		open_list.add(node);
 	}
 
 	@Override
 	public void addToClosed
-	(
-		ASearchNode node
-	) 
+			(
+					ASearchNode node
+			)
 	{
-
+		closed_list.add(node);
 	}
 
 	@Override
-	public int openSize() 
+	public int openSize()
 	{
-		return 0;
+		return open_list.size();
 	}
 
 	@Override
-	public ASearchNode getBest() 
+	public ASearchNode getBest()
 	{
-		return null;
+		return open_list.poll();
 	}
-
 }

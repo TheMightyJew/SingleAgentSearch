@@ -9,12 +9,10 @@ public class IDs
 		
 		String id1 = "209202126";
 		String id2 = "206060923";
-		//String id3 = "123456789";
-		
+
 		ids.add(id1);
 		ids.add(id2);
-		//ids.add(id3);
-		
+
 		return ids;
 	}
 }
