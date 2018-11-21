@@ -30,7 +30,10 @@ public class AStarSearch   extends ASearch
 		open_list = new PriorityQueue<>(new Comparator<ASearchNode>() {
 			@Override
 			public int compare(ASearchNode o1, ASearchNode o2) {
-				return (int)(o1.getF() - o2.getF());
+				if(o1.getF() == o2.getF())
+					return (int)(o1.getH() - o2.getH());
+				else
+					return (int)(o1.getF() - o2.getF());
 			}
 		});
 		closed_list = new ArrayList<>();
